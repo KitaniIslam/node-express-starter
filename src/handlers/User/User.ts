@@ -6,18 +6,34 @@ export const getUsers = (
   request: Request<{}, {}, IAddUser>,
   response: Response<TResponse<IUser[]>>
 ) => {
-  response.status(200).send({
-    data: [
-      {
-        createdAt: new Date(),
-        role: "",
-        username: "@fake_username",
-        name: "",
-        updatedAt: new Date(),
-      },
-    ],
-    error: null,
-  });
+  try {
+    return response.status(201).send({
+      data: [
+        {
+          createdAt: new Date(),
+          role: "",
+          username: "@fake_username",
+          name: "",
+          updatedAt: new Date(),
+        },
+        {
+          createdAt: new Date(),
+          role: "",
+          username: "@fake_username_2",
+          name: "",
+          updatedAt: new Date(),
+        },
+      ],
+      error: null,
+      success: true,
+    });
+  } catch (error) {
+    return response.status(500).send({
+      data: null,
+      error: "Internal Server Error",
+      success: false,
+    });
+  }
 };
 
 export const getUserById = (
@@ -34,11 +50,13 @@ export const getUserById = (
         updatedAt: new Date(),
       },
       error: null,
+      success: true,
     });
   } catch (error) {
     return response.status(500).send({
       data: null,
       error: "Internal Server Error",
+      success: false,
     });
   }
 };
@@ -57,11 +75,13 @@ export const addUser = (
         updatedAt: new Date(),
       },
       error: null,
+      success: true,
     });
   } catch (error) {
     return response.status(500).send({
       data: null,
       error: "Internal Server Error",
+      success: false,
     });
   }
 };
